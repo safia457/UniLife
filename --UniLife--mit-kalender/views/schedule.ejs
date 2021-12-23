@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!-- JQuery -->
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+        <!-- Favicon -->
+        <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon/favicon-16x16.png">
+        <link rel="manifest" href="/images/favicon/site.webmanifest">
+        <!-- Font -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&family=Outfit:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+        <!-- CSS -->
+        <link rel="stylesheet" href="/css/default.css">
+        <link rel="stylesheet" href="/css/animation.css">
+        <link rel="stylesheet" href="/css/bttn.css">
+        <link rel="stylesheet" href="/views/style.css"> 
+        <link rel="stylesheet" href="/css/table.css"> 
+        <!-- Script -->
+        <script src="/js/functions.js"></script>
+        <!-- Title -->
+        <title>UniLife - Lecture Schedule</title>
+      </head>
+      
+
+    <body>
+
+        <header>
+            <nav>
+                <ul>
+                    <a class="focus-in-expand-fwd" class="logo" href="/home" style="font-family:'Caveat', cursive; font-weight: 700; font-size: 900%;">UniLife</a>
+                    <% if(!session) { %>
+                    <a class="focus-in-contract-bck" href="/login">Login</a>
+                    <a class="focus-in-contract-bck" href="/signup">Create an Account</a>
+                    <% } else { %>
+                    <a class="focus-in-contract-bck" href="/calendar">Calendar</a>
+                    <a class="focus-in-contract-bck" href="/schedule">Schedule</a>
+                    <a class="focus-in-contract-bck" href="/account-hub">Profile</a>
+                    <a class="focus-in-contract-bck" href="/contact">Contact</a>
+                    <a class="focus-in-contract-bck" href="/logout" style="font-weight: 600;">Logout</a>
+                    <% } %>
+                </ul>
+            </nav>
+        </header>
+
+<div class="wrapper">
+<div class="container-ease-in">
+    <h1 style="text-align: center;">Schedule of the 2nd semester</h1>
+
+        <table>
+            <thead>
+                <th></th>
+                <th>Monday</th>
+                <th></th>
+                <th>Tuesday</th> 
+                <th></th>
+                <th>Wednesday</th>
+                <th></th>
+                <th>Thursday</th>
+                <th></th>
+                <th style="border-right: 0px solid;">Friday</th>
+            </thead>
+            <tbody>
+                <td>08:15 - 11:45</td>
+                <td>Mathematik Übung 2 <br>
+                    Balzer E62
+                </td>
+                <td>09:00 - 11:45</td>
+                <td>Mathematik 2 <br>
+                    Weitz E62
+                </td>
+                <td>08.30 - 12.00</td>
+                <td>Angewandte Programmierung <br>
+                    Plaß, Putzar E59, Online
+                </td>
+                <td>08:15 - 11:45</td>
+                <td>Lichttechnik <br>
+                    Liedtke E39, Online
+                </td>
+                <td>08:15 - 11:45</td>
+                <td style="border-right: 0px solid;">Projektmanagement</td>
+            </tbody>
+            <tfoot>
+                <td>13:15 - 16:45</td>
+                <td>Netzwerk-Grundlagen <br>
+                    Martini, Oomens E59, E64
+                </td>
+                <td></td>
+                <td></td>
+                <td>14:00 - 17:30</td>
+                <td>MGD2 <br>
+                    Bopp, Heb, Helf E39, Online
+                </td>
+                <td>13:15 - 16:45</td>
+                <td>Video-Technik (AV) Mai Forum <br>
+                    Audio-Technik (AV) Falke Forum
+                </td>
+                <td>13:15 - 16:45</td>
+                <td style="border-right: 0px solid;">Dramaturgie 2 <br>
+                    Menneking E39
+                </td>
+            </tfoot>    
+        </table>
+    </div>
+    </div>
+    </body>
+</html>

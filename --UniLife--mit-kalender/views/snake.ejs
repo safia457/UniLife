@@ -1,0 +1,260 @@
+<html lang="en">
+  <style>
+    #snakeboard {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    #score {
+      position: absolute;
+      text-align: center;
+      font-size: 140px;
+    }
+    .canvaswrapper {
+        /* Wrapper-Klasse im CSS definieren*/
+        display: flex; /* Anzeigeverhalten "flex" für Flexbox*/
+        align-items: flex-start; /*Elemente sollen oben anfangen */
+        flex-direction: column; /*Elemente untereinander anordnen */
+        padding-top: 50px; /*Innenabstand oben; später relevant */
+      }
+      .canvaswrapper > * {
+        /*Selektiert die Unterelemente von Wrapper */
+        padding: 0px 0% 0px 0%; /*Innenabstand oben/unten 10px, Seite 5% */
+        flex: 1100%; /*Gleich wachsen/schrumpfen, 100% Breite */
+        align-self: center; /*auf Horizontale zentriert anordnen */
+        max-width: 100%; /*Max. Breite der Elemente im Wrapper */
+      }
+  </style>
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- JQuery -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <!-- Favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon/favicon-16x16.png">
+    <link rel="manifest" href="/images/favicon/site.webmanifest">
+    <!-- Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&family=Outfit:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <!-- CSS -->
+    <link rel="stylesheet" href="/css/default.css">
+    <link rel="stylesheet" href="/css/animation.css">
+    <link rel="stylesheet" href="/css/bttn.css">
+    <link rel="stylesheet" href="/css/form.css">
+    <!-- Script -->
+    <script src="/js/functions.js"></script>
+    <!-- Title -->
+    <title>UniLife - Snake</title>
+  </head>
+
+  <body>
+
+    <header>
+      <nav>
+          <ul>
+              <a class="focus-in-expand-fwd" class="logo" href="/home" style="font-family:'Caveat', cursive; font-weight: 700; font-size: 900%;">UniLife</a>
+              <% if(!session) { %>
+              <a class="focus-in-contract-bck" href="/login">Login</a>
+              <a class="focus-in-contract-bck" href="/signup">Create an Account</a>
+              <% } else { %>
+              <a class="focus-in-contract-bck" href="/calendar">Calendar</a>
+              <a class="focus-in-contract-bck" href="/schedule">Schedule</a>
+              <a class="focus-in-contract-bck" href="/snake">Snake</a>
+              <a class="focus-in-contract-bck" href="/profile">Profile</a>
+              <a class="focus-in-contract-bck" href="/contact">Contact</a>
+              <a class="focus-in-contract-bck" href="/logout" style="font-weight: 600;">Logout</a>
+              <% } %>
+          </ul>
+      </nav>
+  </header>
+
+    <nav>
+      <a class="focus-in-contract-bck" href="/game">Restart the game!</a>
+    </nav>
+
+    <div class="canvaswrapper">
+    <div id="score" style="font-weight: 200; font-size: 40px;">Score: 0</div>
+    <br>
+    <br>
+    <br>
+
+    <canvas id="snakeboard" width="500" height="500"></canvas>
+  </div>
+    <script>
+      const board_border = "#3b3561";
+      const board_background = "white";
+      const snake_col = "lightblue";
+      const snake_border = "darkblue";
+  
+      let snake = [
+        { x: 200, y: 200 },
+        { x: 190, y: 200 },
+        { x: 180, y: 200 },
+        { x: 170, y: 200 },
+        { x: 160, y: 200 },
+      ];
+  
+      let score = 0;
+      // True if changing direction
+      let changing_direction = false;
+      // Horizontal velocity
+      let food_x;
+      let food_y;
+      let dx = 10;
+      // Vertical velocity
+      let dy = 0;
+  
+      // Get the canvas element
+      const snakeboard = document.getElementById("snakeboard");
+      // Return a two dimensional drawing context
+      const snakeboard_ctx = snakeboard.getContext("2d");
+      // Start game
+      main();
+  
+      gen_food();
+  
+      document.addEventListener("keydown", change_direction);
+  
+      // main function called repeatedly to keep the game running
+      function main() {
+        if (has_game_ended()) return;
+  
+        changing_direction = false;
+        setTimeout(function onTick() {
+          clear_board();
+          drawFood();
+          move_snake();
+          drawSnake();
+          // Repeat
+          main();
+          res.sendFile(__dirname + "/game");
+        }, 100);
+      }
+  
+      // draw a border around the canvas
+      function clear_board() {
+        //  Select the colour to fill the drawing
+        snakeboard_ctx.fillStyle = board_background;
+        snakeboard.style.border = '4px solid #3b3561';
+        //  Select the colour for the border of the canvas
+        snakeboard_ctx.strokestyle = board_border;
+        // Draw a "filled" rectangle to cover the entire canvas
+        snakeboard_ctx.fillRect(0, 0, snakeboard.width, snakeboard.height);
+        // Draw a "border" around the entire canvas
+        snakeboard_ctx.strokeRect(0, 0, snakeboard.width, snakeboard.height);
+      }
+  
+      // Draw the snake on the canvas
+      function drawSnake() {
+        // Draw each part
+        snake.forEach(drawSnakePart);
+      }
+  
+      function drawFood() {
+        snakeboard_ctx.fillStyle = "lightgreen";
+        snakeboard_ctx.strokestyle = "darkgreen";
+        snakeboard_ctx.fillRect(food_x, food_y, 10, 10);
+        snakeboard_ctx.strokeRect(food_x, food_y, 10, 10);
+      }
+  
+      // Draw one snake part
+      function drawSnakePart(snakePart) {
+        // Set the colour of the snake part
+        snakeboard_ctx.fillStyle = snake_col;
+        // Set the border colour of the snake part
+        snakeboard_ctx.strokestyle = snake_border;
+        // Draw a "filled" rectangle to represent the snake part at the coordinates
+        // the part is located
+        snakeboard_ctx.fillRect(snakePart.x, snakePart.y, 10, 10);
+        // Draw a border around the snake part
+        snakeboard_ctx.strokeRect(snakePart.x, snakePart.y, 10, 10);
+      }
+  
+      function has_game_ended() {
+        for (let i = 4; i < snake.length; i++) {
+          if (snake[i].x === snake[0].x && snake[i].y === snake[0].y) return true;
+        }
+        const hitLeftWall = snake[0].x < 0;
+        const hitRightWall = snake[0].x > snakeboard.width - 10;
+        const hitToptWall = snake[0].y < 0;
+        const hitBottomWall = snake[0].y > snakeboard.height - 10;
+        return hitLeftWall || hitRightWall || hitToptWall || hitBottomWall;
+      }
+  
+      function random_food(min, max) {
+        return Math.round((Math.random() * (max - min) + min) / 10) * 10;
+      }
+  
+      function gen_food() {
+        // Generate a random number the food x-coordinate
+        food_x = random_food(0, snakeboard.width - 10);
+        // Generate a random number for the food y-coordinate
+        food_y = random_food(0, snakeboard.height - 10);
+        // if the new food location is where the snake currently is, generate a new food location
+        snake.forEach(function has_snake_eaten_food(part) {
+          const has_eaten = part.x == food_x && part.y == food_y;
+          if (has_eaten) gen_food();
+        });
+      }
+  
+      function change_direction(event) {
+        const LEFT_KEY = 37;
+        const RIGHT_KEY = 39;
+        const UP_KEY = 38;
+        const DOWN_KEY = 40;
+  
+        // Prevent the snake from reversing
+  
+        if (changing_direction) return;
+        changing_direction = true;
+        const keyPressed = event.keyCode;
+        const goingUp = dy === -10;
+        const goingDown = dy === 10;
+        const goingRight = dx === 10;
+        const goingLeft = dx === -10;
+        if (keyPressed === LEFT_KEY && !goingRight) {
+          dx = -10;
+          dy = 0;
+        }
+        if (keyPressed === UP_KEY && !goingDown) {
+          dx = 0;
+          dy = -10;
+        }
+        if (keyPressed === RIGHT_KEY && !goingLeft) {
+          dx = 10;
+          dy = 0;
+        }
+        if (keyPressed === DOWN_KEY && !goingUp) {
+          dx = 0;
+          dy = 10;
+        }
+      }
+  
+      function move_snake() {
+        // Create the new Snake's head
+        const head = { x: snake[0].x + dx, y: snake[0].y + dy };
+        // Add the new head to the beginning of snake body
+        snake.unshift(head);
+        const has_eaten_food = snake[0].x === food_x && snake[0].y === food_y;
+        if (has_eaten_food) {
+          // Increase score
+          score += 10;
+          // Display score on screen
+          document.getElementById("score").innerHTML = "Score: " + score;
+          // Generate new food location
+          gen_food();
+        } else {
+          // Remove the last part of snake body
+          snake.pop();
+        }
+      }
+    </script>
+
+    
+  </body>
+
+</html>

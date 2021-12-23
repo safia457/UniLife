@@ -1,0 +1,19 @@
+{
+  "name": "--unilife--scratch",
+  "version": "1.0.0",
+  "description": "first-build",
+  "main": "script.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Afshin Korrani",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cookie-parser": "^1.4.6",
+    "ejs": "^3.1.6",
+    "express": "^4.17.1",
+    "express-session": "^1.17.2",
+    "sqlite3": "^5.0.2"
+  }
+}

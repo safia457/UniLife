@@ -1,0 +1,117 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- JQuery -->
+    <script
+      src="https://code.jquery.com/jquery-3.4.1.min.js"
+      integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+      crossorigin="anonymous"
+    ></script>
+    <!-- Favicon -->
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="/images/favicon/apple-touch-icon.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="/images/favicon/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="/images/favicon/favicon-16x16.png"
+    />
+    <link rel="manifest" href="/images/favicon/site.webmanifest" />
+    <!-- Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&family=Outfit:wght@100;200;300;400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <!-- CSS -->
+    <link rel="stylesheet" href="/css/default.css" />
+    <link rel="stylesheet" href="/css/animation.css" />
+    <link rel="stylesheet" href="/css/bttn.css" />
+    <link rel="stylesheet" href="/css/form.css" />
+    <!-- Script -->
+    <script src="/js/functions.js"></script>
+    <!-- Title -->
+    <title>UniLife - Home</title>
+  </head>
+
+  <body>
+
+    <header class="header">
+      <nav>
+          <ul>
+              <a class="focus-in-expand-fwd" class="logo" href="/home" style="font-family:'Caveat', cursive; font-weight: 700; font-size: 900%;">UniLife</a>
+              <% if(!session) { %>
+              <a class="focus-in-contract-bck" href="/login">Login</a>
+              <a class="focus-in-contract-bck" href="/signup">Create an Account</a>
+              <% } else { %>
+              <a class="focus-in-contract-bck" href="/calendar">Calendar</a>
+              <a class="focus-in-contract-bck" href="/schedule">Schedule</a>
+              <a class="focus-in-contract-bck" href="/snake">Snake</a>
+              <a class="focus-in-contract-bck" href="/profile">Profile</a>
+              <a class="focus-in-contract-bck" href="/contact">Contact</a>
+              <a class="focus-in-contract-bck" href="/logout" style="font-weight: 600;">Logout</a>
+              <% } %>
+          </ul>
+      </nav>
+  </header>
+
+<div class="parent">
+  <div class="div1">
+    <img class="blur"  src="/images/pictures/Bild1.png" alt="Bild1" width="100%" height="100%">
+  </div>
+  <div class="div2">
+    <img class="effect" src="/images/pictures/Bild2.png" alt="Bild1" width="100%" height="65%">
+  </div>
+  <div class="div3">
+    <img class="effect" src="/images/pictures/Bild3.png" alt="Bild1" width="100%" height="65%">
+  </div>
+  <div class="div4">
+    <img class="effect" src="/images/pictures/Bild4.jpg" alt="Bild1" width="100%" height="65%">
+  </div>
+  <div class="div5">
+    <h2>Welcome to UniLife!</h2>
+    <p>
+      UniLife is a platform designed by students for students to organize
+      their everyday university life.
+    </p>
+  </div>
+  <div class="div6">
+    <h2>Why UniLife?</h2>
+    <p>
+      We wanted to digitize the normal calendar and lecture schedule, so
+      that the average student would no longer have to carry around an
+      annoying planner and save some space in the backpack.
+    </p>
+  </div>
+  <div class="div7">
+    <h2>Functions</h2>
+    <p>
+      You have your own calendar in which you can enter all your important
+      appointments, submissions and exams. In addition you can also create
+      your own lecture schedule.
+    </p>
+  </div>
+  <div class="div8">
+    <h2>Rough Day?</h2>
+    <p>
+      If you had a rough day at university and want to distract yourself for
+      a while, you can play a little game on unilife. And in no time you
+      will have forgotten all the stress.
+    </p>
+  </div>
+  </div>
+
+    </body>
+</html>

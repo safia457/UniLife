@@ -1,0 +1,296 @@
+body {
+  font-family: "Outfit", sans-serif;
+  color: white;
+  margin: 0%;
+  background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+  background-size: 400% 400%;
+  animation: gradient 45s ease infinite;
+  height: 100vh;
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Navigation Bar  */
+
+.header {
+  animation: headerTransition 0.5s both;
+  /* Background color */
+  /* background-color: rgba(0, 0, 0, 0.3); */
+
+  /* You can use gradient background color such as */
+  background: linear-gradient(rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.01) 100%);
+  box-shadow: 5px 1px 550px rgba(245, 245, 245, 0.5);
+
+  /* Curved corners */
+  border-bottom-left-radius: 50% 40%;
+  border-bottom-right-radius: 50% 40%;
+}
+
+nav {
+  color: white;
+  width: 100%;
+  position: relative;
+  text-align: center;
+}
+
+nav a {
+  font-weight: 400;
+  text-decoration: none;
+  color: white;
+  margin: 0 10;
+  font-size: 32px;
+  letter-spacing: 0.5px;
+  word-spacing: 1px;
+  padding: 5px;
+  position: relative;
+}
+
+nav a:before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 4px;
+  background: #8ecae6;
+  top: 90%;
+  animation: out 0.2s cubic-bezier(1, 0, 0.58, 0.97) 1 both;
+}
+
+nav a:hover:before {
+  animation: in 0.2s cubic-bezier(1, 0, 0.58, 0.97) 1 both;
+}
+
+@keyframes in {
+  0% {
+    width: 0;
+    left: 0;
+    right: auto;
+  }
+
+  100% {
+    left: 0;
+    right: auto;
+    width: 100%;
+  }
+}
+
+@keyframes out {
+  0% {
+    width: 100%;
+    left: auto;
+    right: 0;
+  }
+  100% {
+    width: 0;
+    left: auto;
+    right: 0;
+  }
+}
+
+/* Site Ease-In Animation */
+
+.container-ease-in {
+  animation: transitionIn 0.5s 1.1s both;
+}
+
+@keyframes transitionIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Header Animation */
+
+@keyframes headerTransition{
+  from {
+    opacity: 0;
+    transform: translateY(-100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+/* Margin presets */
+
+.margin20 {
+  margin: 20px;
+}
+
+.margin50 {
+  margin: 100px;
+}
+
+/* Wrapper */
+
+.wrapper {
+  /* Wrapper-Klasse im CSS definieren*/
+  display: flex; /* Anzeigeverhalten "flex" für Flexbox*/
+  align-items: flex-start; /*Elemente sollen oben anfangen */
+  flex-direction: column; /*Elemente untereinander anordnen */
+  padding-top: 50px; /*Innenabstand oben; später relevant */
+}
+.wrapper > * {
+  /*Selektiert die Unterelemente von Wrapper */
+  padding: 10px 5% 10px 5%; /*Innenabstand oben/unten 10px, Seite 5% */
+  flex: 1100%; /*Gleich wachsen/schrumpfen, 100% Breite */
+  align-self: center; /*auf Horizontale zentriert anordnen */
+  max-width: 100%; /*Max. Breite der Elemente im Wrapper */
+}
+
+/* Flex-Container */
+
+.flex-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.flex-container > div {
+  width: flex;
+  margin: 25px;
+  text-align: center;
+  line-height: 75px;
+  font-size: 30px;
+}
+
+/* Grid Container */
+
+.grid-container {
+  display: grid;
+  grid-template-columns: auto auto auto auto;
+  grid-gap: 10px;
+  padding: 10px;
+}
+
+.grid-container > div {
+  text-align: center;
+  padding: 20px 0;
+}
+
+.item1 {
+  grid-row: 1 / 1;
+}
+
+.item2 {
+  grid-row: 2 / 1;
+}
+
+.item3 {
+  grid-row: 3 / 4;
+}
+
+.item4 {
+  grid-row: 3 / 4;
+}
+
+/* Picture effects */
+
+img {
+  float: center;
+  border-radius: 15px;
+}
+
+.blur {
+  filter: blur(6px);
+}
+
+.effect {
+  filter: box-shadow(5px 1px 550px rgba(245, 245, 245, 0.5));
+}
+
+
+/* test code */
+  
+.parent {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  grid-template-rows: repeat(6, 1fr);
+  grid-column-gap: 10px;
+  grid-row-gap: 10px;
+  text-align: center;
+  padding-top: 5%;
+  padding-left: 10%;
+  padding-right: 10%;
+}
+
+.div1 {
+  grid-area: 1 / 2 / 3 / 8;
+  z-index: 1;
+}
+.div2 {
+  grid-area: 3 / 2 / 5 / 4;
+  z-index: 1;
+}
+.div3 {
+  grid-area: 3 / 4 / 5 / 6;
+  z-index: 1;
+}
+.div4 {
+  grid-area: 3 / 6 / 5 / 8;
+  z-index: 1;
+}
+.div5 {
+  grid-area: 2 / 3 / 3 / 7;
+  z-index: 2;
+}
+
+.div5 > * {
+  background-color: whitesmoke;
+  color: black;
+  border-radius: 5px;
+}
+
+.div6 {
+  color: black;
+  grid-area: 4 / 2 / 5 / 4;
+  z-index: 2;
+}
+
+.div6 > * {
+  background-color: whitesmoke;
+  color: black;
+  border-radius: 5px;
+}
+
+.div7 {
+  color: black;
+  grid-area: 4 / 4 / 5 / 6;
+  z-index: 2;
+}
+
+.div7 > * {
+  background-color: whitesmoke;
+  color: black;
+  border-radius: 5px;
+}
+
+.div8 {
+  color: black;
+  grid-area: 4 / 6 / 5 / 8;
+  z-index: 2;
+}
+
+.div8 > * {
+  background-color: whitesmoke;
+  color: black;
+  border-radius: 5px;
+}
+
+/* test  */
